@@ -78,7 +78,7 @@ class LTRDataLoader(Dataset):
         # self.df.loc[self.df['label'] >=label_cutoff, 'label'] = 1
         # self.df.loc[self.df['label'] >=1, 'label'] = 1
 
-        # Binarize the labels (Harrie's WSDM'21 approach. Convert labels into P(R=1|q,d) )
+        # Binarize the labels (WSDM'21 Unifying Online and offline paper's approach. Convert labels into P(R=1|q,d) )
         # if mode == 'train' or mode =='val':
         #     rel_scale = (1. - noise)/40.
         # else:
