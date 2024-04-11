@@ -1,0 +1,9 @@
+clickmodel:
+  type: "trust_bias" 
+  eta: 1
+  adversarial: False
+bias_params:
+  alpha: [0.35, 0.53, 0.55, 0.54, 0.52]
+  beta: [0.65, 0.26, 0.15, 0.11, 0.08]
+simulation:
+  num_sessions: 10000  

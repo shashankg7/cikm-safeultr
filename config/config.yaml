@@ -1,0 +1,24 @@
+dataset:
+  root_dir: "<path_to/LTR_datasets>"
+  predict_dir: "<path_to/CRM_project_logs"
+  fold: "Fold1"
+  doc_feat_size: 136
+  normalize: False
+plackettluce:
+  num_samples: 32
+docscorer:
+  hidden_dim1: 150
+  hidden_dim2: 75
+hyperparams:
+  batch_size: 4
+  #lr: 0.0001
+  lr: 0.001
+  optimizer: "Adam"
+  #optimizer: "sgd"
+ranking:
+  k: 5
+  num_samples: 1000
+  max_cand_size: 120
+  num_sessions: 100
+  num_sessions_val: 10000
+    
