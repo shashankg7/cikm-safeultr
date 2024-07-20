@@ -1,9 +1,9 @@
 
-# CIKM 2024 submission number 65 Practical and Robust Safety Guarantees for Advanced Counterfactual Learning to Rank
+# CIKM 2024 full paper Practical and Robust Safety Guarantees for Advanced Counterfactual Learning to Rank
 
 ==============================
 
-Anonymous source code for running the experiments for the CIKM 2024 submission number 65 titled, "Practical and Robust Safety Guarantees for Advanced Counterfactual Learning to Rank". 
+Source code for running the experiments for the CIKM 2024 full paper titled, "Practical and Robust Safety Guarantees for Advanced Counterfactual Learning to Rank". 
 
 Steps to run the code: 
 -----------------------
