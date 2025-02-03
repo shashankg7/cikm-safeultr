@@ -22,7 +22,7 @@ pip3 install -r requirements.txt
 
 ### Data pre-processing: 
 
-1. Some feature values in the datasets is unusually high, so it's a good idea to remove feature values > say 98 percentile in the dataset.
+1. Some feature values in the datasets is unusually high, so it's a good idea to remove outlier feature values > say 98 percentile in the dataset.
 
 
 #### Next steps:
