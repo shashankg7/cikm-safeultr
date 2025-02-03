@@ -230,7 +230,7 @@ class PLRanker(pl.LightningModule):
                 #noise_mask = (unif_noise <= (1 - self.noise_click)).to(torch.int)
                 # Controlled adversarial setup.
                 # adversarial mask 
-                adv_mask = torch.zeros_like(click_prob).bernoulli_(0.6)
+                adv_mask = torch.zeros_like(click_prob).bernoulli_(0.0)
                 # with prob. eps, adversarial clicks are activated, and with prob. (1-eps), normal clicks. 
                 # The higher the eps, the higher the noise in clicks.
                 # eps=1 -> pure adversarial setup, eps=0 -> normal setup
