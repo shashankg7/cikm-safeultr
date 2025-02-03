@@ -20,7 +20,9 @@ pip3 install -r requirements.txt
 
 3) Put them under a common path, under the folder names: MSLR30K, Yahoo, ISTELLA and add the folder path to the config/config.yaml file under the "root_dir" tag under the "dataset" header.
 
-### Data pre-processing: Some feature values in the datasets is unusually high, so it's a good idea to remove feature values > say 98 percentile.
+### Data pre-processing: 
+
+1. Some feature values in the datasets is unusually high, so it's a good idea to remove feature values > say 98 percentile in the dataset.
 
 
 #### Next steps:
