@@ -18,13 +18,17 @@ pip3 install -r requirements.txt
 2) Download the LTR datasets ([MSLR30K](https://www.microsoft.com/en-us/research/project/mslr/), [Yahoo LTR](https://webscope.sandbox.yahoo.com/catalog.php?datatype=c), [ISTELLA-S LETOR](https://istella.ai/datasets/letor-dataset/)). 
 
 
-3) Put them under a common path, under the folder names: MSLR30K, Yahoo, ISTELLA and add the folder path to the config/config.yaml file under the "root_dir" tag under the "dataset" header. 
+3) Put them under a common path, under the folder names: MSLR30K, Yahoo, ISTELLA and add the folder path to the config/config.yaml file under the "root_dir" tag under the "dataset" header.
 
+### Data pre-processing: Some feature values in the datasets is unusually high, so it's a good idea to remove feature values > say 98 percentile.
+
+
+#### Next steps:
 
 4) Create a directory to store the log data and add the path to config/config.yaml under dataset:predict_dir yaml tag
 
 
-4) Train the logging policy on 3% of the relevance (full-information) dataset via the following command:
+5) Train the logging policy on 3% of the relevance (full-information) dataset via the following command:
 
 ```
 python logging_policy.py --noise 0.1 --job_id 1 --dataset Yahoo --num_sessions 100 --fraction 0.030000 --T 1.0 --deterministic False
