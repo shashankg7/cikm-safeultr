@@ -47,12 +47,12 @@ python cltr_pytorch.py --risk 0 --noise 0.5 --job_id 1 --dataset Yahoo --num_ses
 
 6) To train the baseline Doubly-robust model on the generated logged data, run the following command
 ```
-python cltr_pytorch_dr.py --risk 0 --noise 0.5 --job_id 1 --dataset Yahoo --num_sessions 100 --T 1.0
+python cltr_pytorch_dr.py --risk 1 --noise 0.5 --job_id 1 --dataset Yahoo --num_sessions 100 --T 1.0
 ```
 
 7) To train the proposed safe Doubly Robust model on the generated logged data, run the following command
 ```
-python cltr_pytorch_dr.py --risk 1 --noise 0.5 --job_id 1 --dataset Yahoo --num_sessions 100 --T 1.0
+python cltr_pytorch_dr_risk.py --risk 1 --noise 0.5 --job_id 1 --dataset Yahoo --num_sessions 100 --T 1.0
 ```
 
 8) To train the proposed PRPO model on the generated logged data, run the following command
