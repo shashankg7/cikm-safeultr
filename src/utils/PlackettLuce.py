@@ -23,23 +23,9 @@ class PlackettLuceModel:
         Custom implementation of logcumsumexp operation on ranking_scores with masking. 
         Returns document placement probability per rank, and the log-scores(for REINFORCE training)
         '''
-        # set log-scores to -INF at padded position
-        #ranking_scores[~mask] = 0
-        # log-normalizing factor for doc placement prob
         # need to sum from position-i to last position in the ranking. Cumsum gives score from pos-0 till pos-i, hence using flip
-        #log_norm = torch.flip(torch.log(torch.cumsum(torch.exp(torch.flip(ranking_scores, [2])) + self.eps, -1)), [2])
         log_norm = torch.flip(torch.logcumsumexp(torch.flip(ranking_scores, [2]), -1), [2])
-        # exponentiating log_norm to get the 'true' normalizing factor
-        #norm = torch.exp(log_norm)
-        # get placement prob. from log-scores
-        #place_prob = torch.exp(ranking_scores)
-        normalized_scores = torch.exp(ranking_scores - log_norm)
-        # cummulative product to get the actual plackett-luce placement prob, which is product of terms till rank k, for all k. 
-        # TO-DO: How to make them numerically stable for all kinds of inputs? 
-        #doc_prob_per_rank = torch.exp(ranking_scores - log_norm)
         doc_prob_per_rank = torch.cumprod(normalized_scores, dim=-1)
-        # resetting mask values to zero, to avoid nan in log-score computation
-        #ranking_scores[~mask] = 0.
         # get-log-score from top-k elements
         log_score = torch.sum(ranking_scores[:, :, :k], dim=-1) - torch.sum(log_norm[:, :, :k], dim=-1)
         return log_score, doc_prob_per_rank
@@ -50,14 +36,7 @@ class PlackettLuceModel:
         Get placement prob. of document per rank.
         '''
         log_norm = torch.flip(torch.logcumsumexp(torch.flip(ranking_scores, [2]), -1), [2])
-        # exponentiating log_norm to get the 'true' normalizing factor
-        #norm = torch.exp(log_norm)
-        # get placement prob. from log-scores
-        #place_prob = torch.exp(ranking_scores)
         normalized_scores = torch.exp(ranking_scores - log_norm)
-        # cummulative product to get the actual plackett-luce placement prob, which is product of terms till rank k, for all k. 
-        # TO-DO: How to make them numerically stable for all kinds of inputs? 
-        #doc_prob_per_rank = torch.exp(ranking_scores - log_norm)
         doc_prob_per_rank = normalized_scores
         return doc_prob_per_rank
 
@@ -79,10 +58,7 @@ class PlackettLuceModel:
         logits = logits.unsqueeze(1).expand(self.size[0], self.n_samples, self.size[1])
         unif = torch.rand_like(logits)
         gumbel_scores = logits - torch.log(-torch.log(unif + self.eps ) )
-        # Masking out the padded gumbel scores. 
-        # -log(-log(u)) can increase the score of padded docs, so masking them is required.  
         gumbel_scores = gumbel_scores * mask.unsqueeze(1)
-        #gumbel_scores = gumbel_scores + (~mask.unsqueeze(1)) * -torch.tensor(1000000)
         ranking_scores, sampled_rankings = torch.sort(gumbel_scores, descending=True, dim=-1, stable=True)
         return (ranking_scores, sampled_rankings)
 
