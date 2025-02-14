@@ -30,39 +30,49 @@ pip3 install -r requirements.txt
 4) Create a directory to store the log data and add the path to config/config.yaml under dataset:predict_dir yaml tag
 
 
-5) Train the logging policy on 3% of the relevance (full-information) dataset via the following command:
+5) Train the logging policy on 1% of the relevance (full-information) dataset via the following command:
+
+```
+python logging_policy.py --noise 0.1 --job_id 1 --dataset Yahoo --num_sessions 100 --fraction 0.010000 --T 1.0 --deterministic False
+```
+
+With 3% ground-truth relevance judgment (for a stronger logging policy):
 
 ```
 python logging_policy.py --noise 0.1 --job_id 1 --dataset Yahoo --num_sessions 100 --fraction 0.030000 --T 1.0 --deterministic False
 ```
 
-This command will train a logging policy and store the model in the LTR_datasets folder. It will generate 100 sessions (queries) along with a displayed rankings and clicks simulated via the position based model and store the log dataset in the predict_dir folder. 
+This command will train a logging policy and store the model in the LTR_datasets folder. It will generate 100 query sessions in addition to the displayed rankings and clicks simulated via the trust bias click model and store the log dataset in the predict_dir folder. 
 
 
-5) To train the baseline IPS model on the generated logged data, run the following command
+5) To train the baseline IPS model (affine correction) on the generated logged data, run the following command
+   
 ```
 python cltr_pytorch.py --risk 0 --noise 0.5 --job_id 1 --dataset Yahoo --num_sessions 100 --T 1.0
 ```
 
 
-6) To train the baseline Doubly-robust model on the generated logged data, run the following command
+6) To train the baseline doubly-robust model on the generated logged data, run the following command
+   
 ```
 python cltr_pytorch_dr.py --risk 1 --noise 0.5 --job_id 1 --dataset Yahoo --num_sessions 100 --T 1.0
 ```
 
 7) To train the proposed safe Doubly Robust model on the generated logged data, run the following command
+   
 ```
 python cltr_pytorch_dr_risk.py --risk 1 --noise 0.5 --job_id 1 --dataset Yahoo --num_sessions 100 --T 1.0
 ```
 
 8) To train the proposed PRPO model on the generated logged data, run the following command
+   
 ```
 python cltr_pytorch_ppo.py --risk 1 --noise 0.5 --job_id 1 --dataset Yahoo --num_sessions 100 --T 1.0
 
 ```
 
-## Paper
-If you use our code in your research, please remember to cite our work:
+## Citation
+If you use our code in your research, please remember to cite our works:
 
 ```BibTeX
     @inproceedings{gupta-2024-practical,
